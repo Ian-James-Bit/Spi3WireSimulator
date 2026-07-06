@@ -7,7 +7,7 @@ public class Master
     //contructor
     public Master(ThreeWireSPI bus)
     {
-        //this.bus = bus;
+        this.bus = bus;
     }
 
     //used by the master to select slave, choice represents which slave if there were mulitple
