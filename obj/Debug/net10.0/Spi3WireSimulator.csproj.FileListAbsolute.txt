@@ -1,0 +1,15 @@
+C:\Users\NumNu\Documents\Spi3WireSimulator\bin\Debug\net10.0\Spi3WireSimulator.exe
+C:\Users\NumNu\Documents\Spi3WireSimulator\bin\Debug\net10.0\Spi3WireSimulator.deps.json
+C:\Users\NumNu\Documents\Spi3WireSimulator\bin\Debug\net10.0\Spi3WireSimulator.runtimeconfig.json
+C:\Users\NumNu\Documents\Spi3WireSimulator\bin\Debug\net10.0\Spi3WireSimulator.dll
+C:\Users\NumNu\Documents\Spi3WireSimulator\bin\Debug\net10.0\Spi3WireSimulator.pdb
+C:\Users\NumNu\Documents\Spi3WireSimulator\obj\Debug\net10.0\Spi3WireSimulator.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\NumNu\Documents\Spi3WireSimulator\obj\Debug\net10.0\Spi3WireSimulator.AssemblyInfoInputs.cache
+C:\Users\NumNu\Documents\Spi3WireSimulator\obj\Debug\net10.0\Spi3WireSimulator.AssemblyInfo.cs
+C:\Users\NumNu\Documents\Spi3WireSimulator\obj\Debug\net10.0\Spi3WireSimulator.csproj.CoreCompileInputs.cache
+C:\Users\NumNu\Documents\Spi3WireSimulator\obj\Debug\net10.0\Spi3WireSimulator.sourcelink.json
+C:\Users\NumNu\Documents\Spi3WireSimulator\obj\Debug\net10.0\Spi3WireSimulator.dll
+C:\Users\NumNu\Documents\Spi3WireSimulator\obj\Debug\net10.0\refint\Spi3WireSimulator.dll
+C:\Users\NumNu\Documents\Spi3WireSimulator\obj\Debug\net10.0\Spi3WireSimulator.pdb
+C:\Users\NumNu\Documents\Spi3WireSimulator\obj\Debug\net10.0\Spi3WireSimulator.genruntimeconfig.cache
+C:\Users\NumNu\Documents\Spi3WireSimulator\obj\Debug\net10.0\ref\Spi3WireSimulator.dll
