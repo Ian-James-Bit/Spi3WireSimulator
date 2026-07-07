@@ -6,10 +6,12 @@
     //have master write a byte(acting as directions) to slave then slave write back byte(acting as measurement) to master
 
     //testing:
-    byte importantData=0b01101_0110; //214
+    //byte resetCommand=0b1111_0000; //240 but 112 bc first bit is adress;write
+    //byte calibrationCommand=0b1111_0001; //241 but 113 bc first bit is adress;write
+    byte readTemp=0b0111_0000; // 112 bc first bit is adress;read
+    //byte readMoisture=0b1111_0001; //113 bc first bit is adress;read
     driver1.ActivateChipSelect(1);
-    Console.WriteLine(bus1.chipSelect1);
-    driver1.WriteData(importantData);
+    driver1.WriteData(readTemp);
     return 0; 
 }
 main();

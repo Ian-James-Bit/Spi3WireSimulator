@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Spi3WireSimulator")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e849559d6701c6a2d302d0aba34a1c8c6508beeb")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a49d62033b18da4c3d18cb68d4f15f11322ba10f")]
 [assembly: System.Reflection.AssemblyProductAttribute("Spi3WireSimulator")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Spi3WireSimulator")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
