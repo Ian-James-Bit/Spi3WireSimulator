@@ -1,19 +1,17 @@
-using System.Runtime.CompilerServices;
 public class Slave
-{
-    private bool[] data=new bool[8];
-    
+{    
      //for sensor readings
-    private int tempReading=Random.Shared.Next(10, 100);
-    private int moistureReading=Random.Shared.Next(0, 5);
+    private readonly int tempReading=Random.Shared.Next(10, 100);
+    private readonly int moistureReading=Random.Shared.Next(0, 5);
 
-    //private byte data,data read from the master without read or write first bit. the rest is there and is either adress of what data master wants or the command for what master wants slave to do, eg. reset or calibrate
-    private byte finalData;
-    private int bitCount;//so slave knows which bit reading since event function is called each time clock half tick
-    private int sendBackBitCount;
+    private bool[] data=new bool[8];//to take in read or write command sent from master
+    private byte finalData;//stores actual command without r/w bit(msb)
+    private int bitCount;//so slave knows which bit its reading.
+                        //also used to know if your supposed to be sending something back when the clock keeps going
+    private int sendBackBitCount;//to know which bit slave is on when sending back
     private ThreeWireSPI bus; //point to same SPI that master and slave use
 
-    //contructor
+    //contructor, "subscribes" two functions to events
     public Slave(ThreeWireSPI bus)
     {
         this.bus = bus;
@@ -22,10 +20,7 @@ public class Slave
         this.bus.ClockChanged += OnClockChanged;
     }
 
-    //when cs1==false, clock will also start, which activates these two functions, cs func resets data , on clock changes starts reading bits...
-    //into byte data then determines if read or write, 
-
-    //resets bit count bc new communication
+    //on cs change this is called.resets bit counts if activated bc starting new communication
     private void OnChipSelectOn(bool isChipSelectHigh)
     {
         if (isChipSelectHigh == false)//pulled low
@@ -35,13 +30,13 @@ public class Slave
         }
     }
 
+    //on clock change this is called. Reads in command from master, and if "read" command, send back data
     private void OnClockChanged(bool isClockHigh)
     {
-        // The hardware always "sees" the clock, but its brain only acts 
-        // if Chip Select is currently active pulled low (false)
+        // The hardware always "sees" the clock, but its brain only acts if Chip Select is currently active pulled low (false)
         if (bus.chipSelect1 == false)
         {
-            if(bitCount<8)
+            if(bitCount<8)//check if reading or sending on clock tick
             {
                 //if clock is high read in a bit
                 if (bus.serialClock==true)
@@ -58,11 +53,9 @@ public class Slave
                                 finalData |= (byte)(1 << (7-i));
                             }
                         }
-                        Console.WriteLine(finalData);
                         //call read(0/false) or write(1/true) depending on what first bit is
-                        if (data[0]==false)//change this
+                        if (data[0]==false)
                         {
-                            Console.WriteLine("1");
                             finalData=readingTo();//data request
                         }
                         else
@@ -72,7 +65,7 @@ public class Slave
                     }
                 }
             }
-            else
+            else//send data back
             {    
                 if(bus.serialClockChange==false)
                 {
@@ -83,36 +76,32 @@ public class Slave
         }
     }
     
-    //were being written to, look at command and do corresponding action
+    //were being written to, look at command and do corresponding action, no hardware but just pretend
     public void writtenTo()
     {
-        if (finalData==0x70)//command == 112 then
+        if (finalData==0x70)
         {
-            Console.WriteLine("Reseting important hardware.");//no hardware but just pretend
+            Console.WriteLine("SLAVE: Reseting important hardware.");
         }
         else if (finalData==0x71)
         {
-            Console.WriteLine("Calibrating important hardware.");//no hardware but just pretend
+            Console.WriteLine("SLAVE: Calibrating important hardware.");
         }
     }
 
-    //slave is reading command from master, such as calibration or reset
+    //loads up the data requested from master
     public byte readingTo()
     {
-        Console.WriteLine("reading called");
         byte package=new byte();
         if (finalData==0x70)//use temp sensor data
         {
-            Console.WriteLine("temp reading is :"+tempReading);
             package = (byte)tempReading;  
         }
         else if(finalData==0x71)//use humidity sensor data
         {
             package = (byte)moistureReading; 
         }
+        Console.WriteLine("SLAVE: Data Sending: "+package);
         return package;
     }
-
-    
-    
 }

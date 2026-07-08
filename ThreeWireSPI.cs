@@ -1,18 +1,17 @@
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 public class ThreeWireSPI{
-    public bool chipSelect1=true; //active low meaning if true not active, if false(low) active
+    public bool chipSelect1=true; //represents cs wire
 
-    public bool dataWire=false;//dataLow 0(false), dataHigh 1(true) 0 or 1 data is bits, if nothing is being sent data wire just floats in one of these states
+    public bool dataWire=false;//represents data wire
 
     //Mode 0: CPOL = 0, CPHA = 0 (Clock idles low, samples on rising edge)
-    public bool serialClock=false;//can either be down(0==false) or up(1==true), down+up=1tick, the clock idles at logic Low (0==false). The first edge is Rising, and the second is Falling.
+    //can either be down(0==false) or up(1==true), down+up=1tick, the clock idles at logic Low (0==false). The first edge is Rising, and the second is Falling.
+    public bool serialClock=false;//represents serial clock wire
 
-    // The electrical wave events
+    //event stuff
     public event Action<bool>? ChipSelectOn;
     public event Action<bool>? ClockChanged;
 
-    //simulating changing voltage of chip select wire, pulling low
+    //called when changing cs or clock to trigger event for slave
     public bool chipSelect1On
     {
         get => chipSelect1;
